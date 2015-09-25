@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 	"log"
 	"flag"
-
 )
 
 type PaintList struct {
@@ -24,7 +23,6 @@ func handleError(e error) {
 }
 
 func main() {
-
 	var filename string
 	var plist PaintList
 	
@@ -45,7 +43,10 @@ func main() {
 	err = yaml.Unmarshal(source, &plist)
 	handleError(err)
 	
-    fmt.Printf("Value: %#v\n", plist.Description)
-	fmt.Printf("Value: %#v\n", plist.Gwpaint["kantor blue"])
+    fmt.Printf("Description: %#v\n", plist.Description)
+	
+	for key, value := range plist.Gwpaint {
+    fmt.Println("Base:", key, "Layer:", value)
+	}
 	return
-}	
+}
