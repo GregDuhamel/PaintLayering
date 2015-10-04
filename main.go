@@ -1,18 +1,19 @@
 package main
 
 import (
-    "fmt"
-    "github.com/go-yaml/yaml"
+    "gopkg.in/yaml.v2"
+	"gopkg.in/mgo.v2"
     "io/ioutil"
 	"path/filepath"
 	"log"
 	"flag"
+	"fmt"
+	"time"
 )
 
-type PaintList struct {
-	Description string
-    Gwpaint map[string][]string
-	Papaint map[string][]string
+type Config struct {
+	Descritption string
+	Url map[string]string
 }
 
 func handleError(e error) {
@@ -22,11 +23,35 @@ func handleError(e error) {
 	return
 }
 
+func buildURL(conf *Config) string {
+	if (len(conf.Url["login"]) == 0) {
+		conf.Url["login"] = "Guest"
+	}
+	if (len(conf.Url["password"]) == 0) {
+		conf.Url["password"] = "Guest"
+	}
+	if (len(conf.Url["hostname"]) == 0) {
+		conf.Url["hostname"] = "localhost"
+	}
+	if (len(conf.Url["port"]) == 0) {
+		conf.Url["port"] = "27017"
+	}
+	if (len(conf.Url["database"]) == 0) {
+		conf.Url["database"] = "PaintLayering"
+	}
+	if (len(conf.Url["options"]) == 0) {
+		conf.Url["options"] = ""
+	}
+	conn := fmt.Sprintf("mongodb://%s:%s@%s:%s/%s?%s", conf.Url["login"], conf.Url["password"], conf.Url["hostname"], conf.Url["port"], conf.Url["database"], conf.Url["options"])
+	
+	return conn
+}
+
 func main() {
 	var filename string
-	var plist PaintList
+	var conf Config
 	
-	flag.StringVar(&filename, "file", "", "a YAML config file")
+	flag.StringVar(&filename, "conf", "", "a YAML config file")
 	
 	flag.Parse()
 	
@@ -38,15 +63,19 @@ func main() {
 	handleError(err)
 	
 	source, err := ioutil.ReadFile(file)
-	handleError(err)	
-	
-	err = yaml.Unmarshal(source, &plist)
 	handleError(err)
 	
-    fmt.Printf("Description: %#v\n", plist.Description)
+	err = yaml.Unmarshal(source, &conf)
+	handleError(err)
 	
-	for key, value := range plist.Gwpaint {
-    fmt.Println("Base:", key, "Layer:", value)
-	}
+	url := buildURL(&conf)
+	
+	fmt.Println(url)
+	
+	session, err := mgo.DialWithTimeout(url, 15 * time.Second)
+	handleError(err)
+
+	fmt.Println(session)
+
 	return
 }

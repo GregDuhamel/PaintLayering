@@ -1,0 +1,8 @@
+description: "URL to mongoDB"
+url: 
+ hostname: localhost
+ database: PaintLayering
+ password: Guest
+ login: Guest
+ port: 27017
+ options: 
