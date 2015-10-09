@@ -9,6 +9,7 @@ import (
 	"flag"
 	"fmt"
 	"time"
+	"strconv"
 )
 
 type Config struct {
@@ -21,6 +22,16 @@ func handleError(e error) {
 		log.Fatalf("error: %v", e)
 	}
 	return
+}
+
+type plError struct {
+	When time.Time
+	What string
+}
+
+func (e *plError) Error() string {
+	return fmt.Sprintf("at %v, %s",
+	e.When, e.What)
 }
 
 func buildURL(conf *Config) string {
@@ -70,12 +81,25 @@ func main() {
 	
 	url := buildURL(&conf)
 	
-	fmt.Println(url)
+	if (len(conf.Url["description"]) != 0) {
+		fmt.Println(conf.Url["description"])		
+	}
 	
-	session, err := mgo.DialWithTimeout(url, 15 * time.Second)
+	if (len(conf.Url["timeout"]) == 0) {
+		conf.Url["timeout"] = "15"
+	}
+	
+	timeint, err := strconv.Atoi(conf.Url["timeout"])
 	handleError(err)
 
-	fmt.Println(session)
+	timeout := time.Duration(timeint)
+	
+	session, err := mgo.DialWithTimeout(url, timeout * time.Second)
+	handleError(err)
+
+	defer session.Close()
+	
+	session.SetMode(mgo.Monotonic, true)
 
 	return
 }
