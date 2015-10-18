@@ -1,5 +1,5 @@
 description: "PaintLayering configuration file."
-url:
+mongodb:
  description: "Will connect to a local instance of MongoDB." 
  hostname: localhost
  database: PaintLayering
@@ -8,3 +8,7 @@ url:
  port: 27017
  options : 
  timeout : 15
+
+url: 
+ Base:
+ Layer: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600161"
