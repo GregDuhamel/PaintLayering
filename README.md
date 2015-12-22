@@ -1,5 +1,5 @@
 # PaintLayering
-You may have a look to the wiki page.
+You may have a look to the [wiki page](https://github.com/GregDuhamel/PaintLayering/wiki).
 
 ```
 Usage of PaintLayering:
