@@ -3,6 +3,8 @@ mongodb:
  description: "Will connect to a local instance of MongoDB." 
  hostname: localhost
  database: PaintLayering
+ gw-collection: GamesWorkshop
+ pa-collection: PrinceAugust
  password: Guest
  login: Guest
  port: 27017
@@ -10,5 +12,13 @@ mongodb:
  timeout : 15
 
 url: 
- Base:
- Layer: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600161"
+ GWBase: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600159"
+ GWLayer: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600161"
+ GWShade: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600160"
+ GWDry: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600162"
+ GWGlaze: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600163"
+ GWTexture: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600164"
+ GWTechnical: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600165"
+ GWEdge: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600166"
+ PAFull: "http://www.prince-august.net/peintures.php?cPath=6_24"
+ PAGamesFull: "http://www.prince-august.net/peintures.php?cPath=6_79"

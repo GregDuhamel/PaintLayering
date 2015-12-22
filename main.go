@@ -136,11 +136,45 @@ func main() {
 	
 	session.SetMode(mgo.Monotonic, true)
 	
-	err = getJson(conf.Url["Layer"], &e)
+	log.Printf("Will now drop the database : %s", conf.MongoDB["database"])
+	
+	err = session.DB(conf.MongoDB["database"]).DropDatabase()
 	handleError(err)
 	
-	fmt.Printf("Id: %v\n", e[0].Skus[0].Id)
-	fmt.Printf("ProductName: %v\n", e[0].Skus[0].Title)
+	err = getJson(conf.Url["GWLayer"], &e)
+	handleError(err)
+	
+	if (len(conf.MongoDB["gw-collection"]) == 0) {
+		conf.MongoDB["gw-collection"] = "GamesWorkshop"
+	}
+	
+	log.Printf("Creating collection : %s ...", conf.MongoDB["gw-collection"])
+	
+	c := session.DB(conf.MongoDB["database"]).C(conf.MongoDB["gw-collection"])
+	
+	index := mgo.Index {
+		Key:        []string{"Id", "Title"},
+		Unique:     true,
+		DropDups:   true,
+		Background: true,
+		Sparse:     true,
+	}
+	
+	log.Printf("Creating index on collection : %s ...", conf.MongoDB["gw-collection"])
+
+	err = c.EnsureIndex(index)
+	handleError(err)
+	
+	log.Printf("Inserting Data to collection : %s ...", conf.MongoDB["gw-collection"])
+	
+	for _, a := range e {
+		for _, PaintElement := range a.Skus {
+		err = c.Insert(PaintElement)
+		handleError(err)
+		}
+	}
+ 	
+	log.Printf("Data inserted in : %s ...", conf.MongoDB["gw-collection"])
 	
 	os.Exit(0)
-}	
+}
