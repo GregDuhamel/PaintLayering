@@ -11,7 +11,7 @@ mongodb:
  options : 
  timeout : 15
 
-url: 
+gw-url: 
  GWBase: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600159"
  GWLayer: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600161"
  GWShade: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600160"
@@ -20,5 +20,6 @@ url:
  GWTexture: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600164"
  GWTechnical: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600165"
  GWEdge: "http://www.games-workshop.com/en-WW/catalog/fragments/multiSkuJSON.jsp?product=prod2600166"
+pa-url: 
  PAFull: "http://www.prince-august.net/peintures.php?cPath=6_24"
  PAGamesFull: "http://www.prince-august.net/peintures.php?cPath=6_79"
