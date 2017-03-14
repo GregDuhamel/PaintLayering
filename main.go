@@ -9,18 +9,18 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strconv"
 	"time"
-	"net/url"
 )
 
 type Config struct {
 	Descritption string
-	MongoDB		map[string]string
-	GW-url		map[string]string
-	PA-url		map[string]string
+	MongoDB      map[string]string
+	GWurl        map[string]string
+	PAurl        map[string]string
 }
 
 type envId struct {
@@ -49,10 +49,6 @@ type paintId struct {
 func handleError(e error) {
 	if e != nil {
 		log.Fatalf("[ERROR] - %v", e)
-	}
-	
-	if e != nil {
-	
 	}
 	return
 }
@@ -120,7 +116,7 @@ func main() {
 	err = yaml.Unmarshal(source, &conf)
 	handleError(err)
 
-	url := buildURL(&conf)
+	mongoUrl := buildURL(&conf)
 
 	if len(conf.MongoDB["description"]) != 0 {
 		log.Println(conf.MongoDB["description"])
@@ -135,7 +131,7 @@ func main() {
 
 	timeout := time.Duration(timeint)
 
-	session, err := mgo.DialWithTimeout(url, timeout*time.Second)
+	session, err := mgo.DialWithTimeout(mongoUrl, timeout*time.Second)
 	handleError(err)
 
 	defer session.Close()
@@ -147,15 +143,14 @@ func main() {
 	err = session.DB(conf.MongoDB["database"]).DropDatabase()
 	handleError(err)
 
-	for _, gwurl := range conf.GW-url {
-	_, err := url.Parse(gwurl)
-	handleError(err)
-	
-	err = getJson(gwurl, &e)
-	handleError(err)
+	for _, gwurl := range conf.GWurl {
+		_, err := url.Parse(gwurl)
+		handleError(err)
+
+		err = getJson(gwurl, &e)
+		handleError(err)
 	}
 
-	}
 	if len(conf.MongoDB["gw-collection"]) == 0 {
 		conf.MongoDB["gw-collection"] = "GamesWorkshop"
 	}
