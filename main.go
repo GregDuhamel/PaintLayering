@@ -16,24 +16,24 @@ import (
 	"time"
 )
 
-type Config struct {
+type config struct {
 	Descritption string
 	MongoDB      map[string]string
 	GWurl        map[string]string
 	PAurl        map[string]string
 }
 
-type envId struct {
+type envID struct {
 	CustomLimitMessage string    `json:"customLimitMessage"`
-	Skus               []paintId `json:"skus"`
+	Skus               []paintID `json:"skus"`
 	Dangerous          bool      `json:"dangerous"`
 	Hazardous          bool      `json:"hazardous"`
 	LimitedQuantity    uint8     `json:"limitedQuantity"`
-	ProductId          string    `json:"productId"`
+	ProductID          string    `json:"productId"`
 }
 
-type paintId struct {
-	Id                 string `json:"id"`
+type paintID struct {
+	ID                 string `json:"id"`
 	AvailabilityStatus string `json:"availabilityStatus"`
 	Title              string `json:"title"`
 	Price              string `json:"price"`
@@ -43,7 +43,7 @@ type paintId struct {
 	Swatch             string `json:"swatch"`
 	Dangerous          bool   `json:"dangerous"`
 	ProductType        string `json:"productType"`
-	ProductId          string `json:"productId"`
+	ProductID          string `json:"productId"`
 }
 
 func handleError(e error) {
@@ -63,7 +63,7 @@ func (e *plError) Error() string {
 		e.When, e.What)
 }
 
-func buildURL(conf *Config) string {
+func buildURL(conf *config) string {
 	if len(conf.MongoDB["login"]) == 0 {
 		conf.MongoDB["login"] = "Guest"
 	}
@@ -87,7 +87,7 @@ func buildURL(conf *Config) string {
 	return conn
 }
 
-func getJson(url string, target interface{}) error {
+func getJSON(url string, target interface{}) error {
 	r, err := http.Get(url)
 	handleError(err)
 	defer r.Body.Close()
@@ -97,8 +97,8 @@ func getJson(url string, target interface{}) error {
 
 func main() {
 	var filename string
-	var conf Config
-	var e []envId
+	var conf config
+	var e []envID
 
 	flag.StringVar(&filename, "conf", "", "a YAML config file")
 	flag.Parse()
@@ -116,7 +116,7 @@ func main() {
 	err = yaml.Unmarshal(source, &conf)
 	handleError(err)
 
-	mongoUrl := buildURL(&conf)
+	mongoURL := buildURL(&conf)
 
 	if len(conf.MongoDB["description"]) != 0 {
 		log.Println(conf.MongoDB["description"])
@@ -131,7 +131,7 @@ func main() {
 
 	timeout := time.Duration(timeint)
 
-	session, err := mgo.DialWithTimeout(mongoUrl, timeout*time.Second)
+	session, err := mgo.DialWithTimeout(mongoURL, timeout*time.Second)
 	handleError(err)
 
 	defer session.Close()
@@ -147,7 +147,7 @@ func main() {
 		_, err := url.Parse(gwurl)
 		handleError(err)
 
-		err = getJson(gwurl, &e)
+		err = getJSON(gwurl, &e)
 		handleError(err)
 	}
 
