@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"gopkg.in/mgo.v2"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -14,6 +12,9 @@ import (
 	"path/filepath"
 	"strconv"
 	"time"
+
+	"gopkg.in/mgo.v2"
+	"gopkg.in/yaml.v2"
 )
 
 type config struct {
