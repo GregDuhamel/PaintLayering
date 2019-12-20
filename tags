@@ -1,0 +1,45 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/3fdf28bc/
+AvailabilityStatus	main.go	/^	AvailabilityStatus string `json:"availabilityStatus"`$/;"	m	struct:main.paintID	typeref:typename:string
+CustomLimitMessage	main.go	/^	CustomLimitMessage string    `json:"customLimitMessage"`$/;"	m	struct:main.envID	typeref:typename:string
+Dangerous	main.go	/^	Dangerous          bool      `json:"dangerous"`$/;"	m	struct:main.envID	typeref:typename:bool
+Dangerous	main.go	/^	Dangerous          bool   `json:"dangerous"`$/;"	m	struct:main.paintID	typeref:typename:bool
+Descritption	main.go	/^	Descritption string$/;"	m	struct:main.config	typeref:typename:string
+DisplayName	main.go	/^	DisplayName        string `json:"displayName"`$/;"	m	struct:main.paintID	typeref:typename:string
+Error	main.go	/^func (e *plError) Error() string {$/;"	f	struct:main.plError	typeref:typename:string
+GWurl	main.go	/^	GWurl        map[string]string$/;"	m	struct:main.config	typeref:typename:map[string]string
+Hazardous	main.go	/^	Hazardous          bool      `json:"hazardous"`$/;"	m	struct:main.envID	typeref:typename:bool
+ID	main.go	/^	ID                 string `json:"id"`$/;"	m	struct:main.paintID	typeref:typename:string
+ImageName	main.go	/^	ImageName          string `json:"imageName"`$/;"	m	struct:main.paintID	typeref:typename:string
+LimitedQuantity	main.go	/^	LimitedQuantity    uint8     `json:"limitedQuantity"`$/;"	m	struct:main.envID	typeref:typename:uint8
+MongoDB	main.go	/^	MongoDB      map[string]string$/;"	m	struct:main.config	typeref:typename:map[string]string
+PAurl	main.go	/^	PAurl        map[string]string$/;"	m	struct:main.config	typeref:typename:map[string]string
+PaintLayering	README.md	/^# PaintLayering$/;"	c
+Price	main.go	/^	Price              string `json:"price"`$/;"	m	struct:main.paintID	typeref:typename:string
+ProductID	main.go	/^	ProductID          string    `json:"productId"`$/;"	m	struct:main.envID	typeref:typename:string
+ProductID	main.go	/^	ProductID          string `json:"productId"`$/;"	m	struct:main.paintID	typeref:typename:string
+ProductTitle	main.go	/^	ProductTitle       string `json:"productTitle"`$/;"	m	struct:main.paintID	typeref:typename:string
+ProductType	main.go	/^	ProductType        string `json:"productType"`$/;"	m	struct:main.paintID	typeref:typename:string
+Skus	main.go	/^	Skus               []paintID `json:"skus"`$/;"	m	struct:main.envID	typeref:typename:[]paintID
+Swatch	main.go	/^	Swatch             string `json:"swatch"`$/;"	m	struct:main.paintID	typeref:typename:string
+Title	main.go	/^	Title              string `json:"title"`$/;"	m	struct:main.paintID	typeref:typename:string
+What	main.go	/^	What string$/;"	m	struct:main.plError	typeref:typename:string
+When	main.go	/^	When time.Time$/;"	m	struct:main.plError	typeref:typename:time.Time
+buildURL	main.go	/^func buildURL(conf *config) string {$/;"	f	package:main	typeref:typename:string
+comment	vendor/vendor.json	/^	"comment": "",$/;"	s
+config	main.go	/^type config struct {$/;"	s	package:main
+envID	main.go	/^type envID struct {$/;"	s	package:main
+getJSON	main.go	/^func getJSON(url string, target interface{}) error {$/;"	f	package:main	typeref:typename:error
+handleError	main.go	/^func handleError(e error) {$/;"	f	package:main
+ignore	vendor/vendor.json	/^	"ignore": "test",$/;"	s
+main	main.go	/^func main() {$/;"	f	package:main
+main	main.go	/^package main$/;"	p
+package	vendor/vendor.json	/^	"package": [],$/;"	a
+paintID	main.go	/^type paintID struct {$/;"	s	package:main
+plError	main.go	/^type plError struct {$/;"	s	package:main
+rootPath	vendor/vendor.json	/^	"rootPath": "github.com\/PaintLayering"$/;"	s
