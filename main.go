@@ -51,17 +51,6 @@ func handleError(e error) {
 	if e != nil {
 		log.Fatalf("[ERROR] - %v", e)
 	}
-	return
-}
-
-type plError struct {
-	When time.Time
-	What string
-}
-
-func (e *plError) Error() string {
-	return fmt.Sprintf("at %v, %s",
-		e.When, e.What)
 }
 
 func buildURL(conf *config) string {
